@@ -1,0 +1,1 @@
+{"version":3,"sources":["api/register/register.controller.js"],"names":["index","req","res"],"mappings":";;;;;QAKgBA,K,GAAAA,K;AALhB;;AAKO,SAASA,KAAT,CAAeC,GAAf,EAAoBC,GAApB,EAAyB,CAC/B","file":"register.controller.js","sourcesContent":["/* eslint-disable consistent-return,max-len,no-param-reassign */\n\n\n\n\nexport function index(req, res) {\n}\n\n"]}

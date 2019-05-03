@@ -1,0 +1,1 @@
+{"version":3,"sources":["api/login/login.controller.js"],"names":["index","req","res","send"],"mappings":";;;;;QAGgBA,K,GAAAA,K;AAAT,SAASA,KAAT,CAAeC,GAAf,EAAoBC,GAApB,EAAyB;AAChCA,MAAIC,IAAJ,CAAS,eAAT;AACC","file":"login.controller.js","sourcesContent":["\n\n\nexport function index(req, res) {\nres.send('yup I done it');\n}\n"]}
