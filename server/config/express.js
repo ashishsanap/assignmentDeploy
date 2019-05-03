@@ -13,7 +13,7 @@ exports.default = function (app) {
   }
 
   if (env === 'production') {
-    app.use((0, _serveFavicon2.default)(_path2.default.join(_environment2.default.root, 'client', 'favicon.ico')));
+    //app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
     app.use((0, _cors2.default)());
   }
 
