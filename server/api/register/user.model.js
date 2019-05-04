@@ -19,7 +19,29 @@ const UserSchema = new Schema({
   },
   name: {
     type: String
-  }
+  },
+  searchPlaces: [{
+    placeName: {
+      type: String
+    },
+    placeResult: {
+      type: Object
+    },
+    date: {
+      type: Date
+    }
+  }],
+  nearPlaces: [{
+    name: {
+      type: String
+    },
+    result: {
+      type: Object
+    },
+    date: {
+      type: Date
+    }
+  }]
 
 }, {
   timestamps: true

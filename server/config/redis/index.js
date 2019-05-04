@@ -9,6 +9,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const redisClient = _redis2.default.createClient(process.env.REDISCLOUD_URL, { no_ready_check: true });
 
 redisClient.on('ready', () => {
+  redisClient.set('aaa', 'aaa');
   console.log('start redis');
 });
 

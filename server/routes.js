@@ -6,8 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (app) {
   app.use('/api/login', require('./api/login'));
-  app.use('/api/register', require('./api/register'));
   app.use('/api/logout', require('./api/logout'));
+  app.use('/api/register', require('./api/register'));
+  app.use('/api/search', require('./api/search'));
+  app.use('/api/user', require('./api/user'));
+
   app.use((req, res, next) => {
     res.status(404);
 

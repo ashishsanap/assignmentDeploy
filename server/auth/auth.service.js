@@ -24,30 +24,27 @@ function isAuthenticated(req, res, next) {
   if (typeof bearerHeader !== 'undefined') {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
-    req.token = bearerToken;
-    _jsonwebtoken2.default.verify(req.token, process.env.JWT_SECKERT_KEY, (err, authData) => {
+    _jsonwebtoken2.default.verify(bearerToken, process.env.JWT_SECKERT_KEY, (err, authData) => {
       if (err || typeof authData === 'undefined') {
-        res.status(403).json({ success: false, msg: 'Unauthorised access3' });
-      } else {
-        redisClient.get(`R${authData.user.PM_Client_MobileNumber}`, (err, reply) => {
-          console.log(reply);
-          if (err) {
-            res.status(403).json({ success: false, msg: 'Unauthorised access2' });
-          } else if (reply === req.token) {
-            redisClient.set(`R${authData.user.PM_Client_MobileNumber}`, `${req.token}`);
-            // redisClient.expire(`R${authData.user.PM_User_MobileNumber}`, process.env.IDEL_SESSION_TIME); // session time
-            req.authData = authData.user;
-            return next();
-          } else {
-            console.log(reply);
-            res.status(403).json({ success: false, msg: 'Unauthorised access1' });
-          }
-        });
+        return res.status(401).json({ success: false, msg: 'Unauthorised access' });
       }
+      redisClient.get(`login-${authData.user.email}`, (redisErr, reply) => {
+        if (redisErr) {
+          return res.status(401).json({ success: false, msg: 'Unauthorised access' });
+        } else if (reply === bearerToken) {
+          redisClient.set(`login-${authData.user.email}`, reply, 'EX', 3600);
+          // redisClient.expire(`R${authData.user.PM_User_MobileNumber}`, process.env.IDEL_SESSION_TIME); // session time
+          req.user = authData.user;
+          return next();
+        }
+        return res.status(401).json({ success: false, msg: 'Unauthorised access' });
+      });
+      return true;
     });
   } else {
-    res.status(403).json({ success: false, msg: 'Unauthorised access4' });
+    return res.status(401).json({ success: false, msg: 'Unauthorised access' });
   }
+  return true;
   // });
 }
 //# sourceMappingURL=auth.service.js.map

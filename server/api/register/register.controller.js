@@ -3,6 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 exports.decode = decode;
 exports.index = index;
 
@@ -25,16 +30,24 @@ function decode(value) {
 }
 // eslint-disable-next-line import/prefer-default-export
 function index(req, res) {
-  console.log(req.body);
-  req.body.password = decode(req.body.password);
-  _user2.default.create(req.body).then(user => {
-    console.log(user);
-    return res.status(200).json({ success: true, message: 'Account Created Successfully', data: user });
-  }).catch(err => {
-    if (err.errmsg.includes('duplicate')) {
-      return res.status(409).json({ success: false, message: 'Account Already Present', data: 'Email or Mobile Number already register' });
-    }
-    return res.status(500).json({ success: false, message: 'Something Went wrong', data: '', err });
-  });
+  const keys = (0, _keys2.default)(req.body);
+  if (keys.includes('email') && keys.includes('mobileNo') && keys.includes('password')) {
+    req.body.password = decode(req.body.password);
+    _user2.default.create(req.body).then(user => {
+      console.log(user);
+      return res.status(201).json({ success: true, message: 'Account Created Successfully', data: user });
+    }).catch(err => {
+      if (err.errmsg.includes('duplicate')) {
+        return res.status(409).json({
+          success: false,
+          message: 'Account Already Present',
+          data: 'Email or Mobile Number already register'
+        });
+      }
+      return res.status(500).json({ success: false, message: 'Something Went wrong', data: '', err });
+    });
+  } else {
+    return res.status(406).json({ success: false, message: 'You Miss some parameters', data: '' });
+  }
 }
 //# sourceMappingURL=register.controller.js.map
