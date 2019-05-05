@@ -32,7 +32,10 @@ function index(req, res) {
       $or: [{ email: req.body.userName }, { mobileNo: req.body.userName }],
       password: (0, _register.decode)(req.body.password)
     };
-    return _user2.default.findOne(condition, { password: 0, __v: 0 }).then(user => {
+    return _user2.default.findOne(condition, { password: 0,
+      __v: 0,
+      searchPlaces: 0,
+      nearPlaces: 0 }).then(user => {
       if (user) {
         _jsonwebtoken2.default.sign({ user }, process.env.JWT_SECKERT_KEY, (err, token) => {
           if (err) {
