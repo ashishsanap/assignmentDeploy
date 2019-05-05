@@ -26,7 +26,8 @@
     "redis": "^2.8.0",
     "sequelize": "^4.38.0",
     "serve-favicon": "^2.3.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@angular/common": "^6.0.4",

@@ -26,21 +26,7 @@ const all = {
   clientPort: process.env.CLIENT_PORT || 3000,
 
   // Server port
-  PORT: process.env.PORT || 9000,
-
-  DB_HOST: process.env.DB_HOST,
-  DB_USERNAME: process.env.DB_USERNAME,
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  DB_NAME: process.env.DB_NAME,
-  DOMAIN_DB_NAME: process.env.DOMAIN_DB_NAME,
-
-  // Server IP
-  IP: process.env.IP || '0.0.0.0',
-
-  // Secret for session, you will want to change this and make it an environment variable
-  secrets: {
-    session: 'setup-secret'
-  }
+  PORT: process.env.PORT || 9000
 };
 
 // Export the config object based on the NODE_ENV

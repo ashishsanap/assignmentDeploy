@@ -20,10 +20,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function connectMongo() {
   _mongoose2.default.set('useCreateIndex', true);
   _mongoose2.default.set('useFindAndModify', false);
-  console.log(process.env.DB_HOST);
   return new _promise2.default((resolve, reject) => _mongoose2.default.connect(`${process.env.MONGODB_URI}`, {
     useNewUrlParser: true
-  }).then(yes => resolve('conneted', yes)).catch(err => reject('not connected' + err, err)));
+  }).then(yes => resolve('conneted', yes)).catch(err => reject(`not connected${err}`, err)));
 }
 
 function getObjectID(ID) {
